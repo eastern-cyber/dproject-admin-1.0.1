@@ -1,0 +1,85 @@
+"use client";
+
+import { useState } from "react";
+import Papa from "papaparse";
+
+export default function CsvToJsonConverter() {
+  const [jsonData, setJsonData] = useState<any[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    setUploading(true);
+    setConverting(false);
+    setDownloading(false);
+    setProgress(0);
+
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      step: () => {
+        setProgress((prev) => Math.min(prev + 10, 100)); // Simulated progress
+      },
+      complete: (result) => {
+        setJsonData(result.data);
+        setUploading(false);
+        setConverting(true);
+        setProgress(100);
+        setTimeout(() => setConverting(false), 1000); // Simulate conversion time
+      },
+    });
+  };
+
+  const downloadJson = () => {
+    if (jsonData.length === 0) return;
+    setDownloading(true);
+    
+    const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
+      JSON.stringify(jsonData, null, 2)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = "converted.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => setDownloading(false), 1000);
+  };
+
+  return (
+    <div className="flex flex-col items-center mt-10 p-6 border rounded-lg shadow-lg max-w-lg mx-auto">
+      <h1 className="text-xl font-bold mb-4">CSV to JSON Converter</h1>
+      <input
+        type="file"
+        accept=".csv"
+        onChange={handleFileUpload}
+        className="mb-4 border p-2 rounded"
+      />
+      {uploading && <p className="text-gray-500">Uploading file...</p>}
+      {converting && (
+        <div className="w-full bg-gray-200 rounded-full h-6 mb-4 relative">
+          <div
+            className="bg-blue-500 h-6 rounded-full text-white text-sm flex items-center justify-center"
+            style={{ width: `${progress}%` }}
+          >
+            {progress}%
+          </div>
+        </div>
+      )}
+      {converting && <p className="text-gray-500">Converting to JSON...</p>}
+      <button
+        onClick={downloadJson}
+        className={`mt-2 px-4 py-2 rounded ${jsonData.length > 0 ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-400 text-gray-700 cursor-not-allowed"}`}
+        disabled={jsonData.length === 0 || downloading}
+      >
+        {downloading ? "Downloading..." : "Download JSON"}
+      </button>
+    </div>
+  );
+}
