@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 interface RefereeData {
@@ -7,9 +9,10 @@ interface RefereeData {
 
 export default function RefereesPage() {
   const [data, setData] = useState<RefereeData[]>([]);
+  const jsonUrl = "https://dfi.fund/public/refereeshttps://github.com/eastern-cyber/dproject-11/blob/main/public/referees.json"; // Updated URL
 
   useEffect(() => {
-    fetch("/referees.json")  // Updated file name
+    fetch(jsonUrl)
       .then((res) => res.json())
       .then((jsonData: RefereeData[]) => setData(jsonData))
       .catch((err) => console.error("Error loading JSON:", err));

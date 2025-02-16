@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 interface RefereeData {
@@ -6,14 +8,33 @@ interface RefereeData {
 }
 
 export default function RefereesPage() {
-  const [data, setData] = useState<RefereeData[]>([]);
+  const [data, setData] = useState<RefereeData[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const jsonUrl = "https://raw.githubusercontent.com/eastern-cyber/dproject-11/main/public/referees.json"; // ✅ Correct URL
 
   useEffect(() => {
-    fetch("/referees.json")  // Updated file name
-      .then((res) => res.json())
-      .then((jsonData: RefereeData[]) => setData(jsonData))
-      .catch((err) => console.error("Error loading JSON:", err));
+    fetch(jsonUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json();
+      })
+      .then((jsonData: RefereeData[]) => {
+        setData(jsonData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading JSON:", err);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return <div className="p-6">Loading...</div>;
+  }
+
+  if (!data) {
+    return <div className="p-6 text-red-600">Failed to load data.</div>;
+  }
 
   return (
     <div className="p-6">

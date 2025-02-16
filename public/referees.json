@@ -1,0 +1,11 @@
+[
+    {
+        "refereeId": "1",
+        "referrerId": "X"
+    },
+    {
+        "refereeId": "2",
+        "referrerId": "1"
+    }
+]
+
