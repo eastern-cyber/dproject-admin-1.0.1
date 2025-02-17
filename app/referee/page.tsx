@@ -7,7 +7,7 @@ interface RefereeData {
   referrerId: string;
 }
 
-export default function RefereesPage() {
+export default function RefereePage() {
   const [data, setData] = useState<RefereeData[] | null>(null);
   const [loading, setLoading] = useState(true);
   const jsonUrl = "https://raw.githubusercontent.com/eastern-cyber/dproject-11/main/public/referees.json"; // ✅ Correct URL
