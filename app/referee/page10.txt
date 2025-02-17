@@ -29,8 +29,8 @@ export default function RefereePage() {
       fetch(referrersUrl).then((res) => res.json())
     ])
       .then(([refereesData, referrersData]) => {
-        // Ensure that referrerId exists and is not empty
-        const validReferrers = referrersData.filter((item: ReferrerData) => item.referrerId && item.referrerId.trim() !== "");
+        // Filter out referrers with empty referrerId
+        const validReferrers = referrersData.filter(item => item.referrerId);
         setReferees(refereesData);
         setReferrers(validReferrers);
         setLoading(false);
@@ -58,7 +58,7 @@ export default function RefereePage() {
 
   return (
     <div className="p-6 bg-gray-900 text-white min-h-screen">
-      <h1 className="text-xl font-bold">ตรวจสอบรายชื่อผู้ที่ท่านแนะนำ (Referee Lookup)</h1>
+      <h1 className="text-xl font-bold">ตรวจสอบรายชื่อผู้ที่ท่านแนะนำ (Referee Lookup)</h1>      
       <h2 className="text-xl font-bold">ใส่เลขกระเป๋าของเท่าน</h2>
       <input
         type="text"
@@ -80,7 +80,7 @@ export default function RefereePage() {
             </tr>
           </thead>
           <tbody>
-            {matchingReferrerRecords.map((item: ReferrerData) => (
+            {matchingReferrerRecords.map((item) => (
               <tr key={item.referrerId}>
                 <td className="border border-gray-400 px-4 py-2">{item.referrerId.slice(0, 6)}...{item.referrerId.slice(-4)}</td>
                 <td className="border border-gray-400 px-4 py-2">{item.name || "N/A"}</td>
