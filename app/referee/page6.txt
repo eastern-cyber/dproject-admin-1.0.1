@@ -1,0 +1,90 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface RefereeData {
+  refereeId: string;
+}
+
+interface ReferrerData {
+  referrerId: string;
+  name?: string;
+  email?: string;
+  tokenId?: string;
+}
+
+export default function RefereePage() {
+  const [referees, setReferees] = useState<RefereeData[] | null>(null);
+  const [referrers, setReferrers] = useState<ReferrerData[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [refereeId, setRefereeId] = useState("");
+
+  const refereesUrl =
+    "https://raw.githubusercontent.com/eastern-cyber/dproject-11/main/public/referees.json";
+  const referrersUrl =
+    "https://raw.githubusercontent.com/eastern-cyber/dproject-11/main/public/referrers.json";
+
+  useEffect(() => {
+    Promise.all([
+      fetch(refereesUrl).then((res) => res.json()),
+      fetch(referrersUrl).then((res) => res.json()),
+    ])
+      .then(([refereesData, referrersData]) => {
+        setReferees(refereesData);
+        setReferrers(referrersData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error loading JSON:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <div className="p-6">Loading...</div>;
+  }
+
+  if (!referees || !referrers) {
+    return <div className="p-6 text-red-600">Failed to load data.</div>;
+  }
+
+  // Find the matching referrer based on refereeId
+  const matchedReferrer = referrers.find((item) => item.referrerId === refereeId);
+
+  return (
+    <div className="p-6 bg-gray-900 text-white min-h-screen">
+      <h1 className="text-xl font-bold">Referee Lookup</h1>
+      <input
+        type="text"
+        placeholder="Enter Referee ID"
+        value={refereeId}
+        onChange={(e) => setRefereeId(e.target.value)}
+        className="border border-gray-400 p-2 rounded mt-4 w-full bg-gray-800 text-white"
+      />
+
+      <h2 className="text-lg font-semibold mt-4">Referrer Information</h2>
+      {matchedReferrer ? (
+        <table className="table-auto border-collapse border border-gray-500 mt-4 w-full">
+          <thead>
+            <tr>
+              <th className="border border-gray-400 px-4 py-2">Referrer ID</th>
+              <th className="border border-gray-400 px-4 py-2">Referrer Name</th>
+              <th className="border border-gray-400 px-4 py-2">Referrer Email</th>
+              <th className="border border-gray-400 px-4 py-2">Token ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border border-gray-400 px-4 py-2">{matchedReferrer.referrerId}</td>
+              <td className="border border-gray-400 px-4 py-2">{matchedReferrer.name || "N/A"}</td>
+              <td className="border border-gray-400 px-4 py-2">{matchedReferrer.email || "N/A"}</td>
+              <td className="border border-gray-400 px-4 py-2">{matchedReferrer.tokenId || "N/A"}</td>
+            </tr>
+          </tbody>
+        </table>
+      ) : (
+        <p className="mt-2 text-gray-400">No referrer found for this referee ID.</p>
+      )}
+    </div>
+  );
+}
