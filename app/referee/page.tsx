@@ -41,14 +41,14 @@ export default function RefereePage() {
   const filteredReferees = data.filter((item) => item.referrerId === referrerId);
 
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold">Referee Lookup</h1>
+    <div className="p-6 bg-gray-900 text-white min-h-screen">
+      <h1 className="text-xl font-bold">Referee Lookup (กรอกเลขที่กระเป๋าของท่าน)</h1>
       <input
         type="text"
         placeholder="Enter Referrer ID"
         value={referrerId}
         onChange={(e) => setReferrerId(e.target.value)}
-        className="border border-gray-400 p-2 rounded mt-4 w-full"
+        className="border border-gray-400 p-2 rounded mt-4 w-full bg-gray-800 text-white"
       />
 
       <h2 className="text-lg font-semibold mt-4">Matching Referees</h2>
@@ -56,7 +56,7 @@ export default function RefereePage() {
         <table className="table-auto border-collapse border border-gray-500 mt-4 w-full">
           <thead>
             <tr>
-              <th className="border border-gray-400 px-4 py-2">Referee ID</th>
+              <th className="border border-gray-400 px-4 py-2">Referee ID (รายการสมาชิกที่ท่านเป็นผู้แนะนำ)</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +68,7 @@ export default function RefereePage() {
           </tbody>
         </table>
       ) : (
-        <p className="mt-2 text-gray-600">No referees found for this referrer ID.</p>
+        <p className="mt-2 text-gray-400">No referees found for this referrer ID.</p>
       )}
     </div>
   );
