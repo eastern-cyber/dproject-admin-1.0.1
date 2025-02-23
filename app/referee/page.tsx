@@ -73,7 +73,8 @@ export default function RefereePage() {
         <table className="table-auto border-collapse border border-gray-500 mt-4 w-full">
           <thead>
             <tr>
-              <th className="border border-gray-400 px-4 py-2">ผู้ที่ท่านแนะนำ</th>
+              <th className="border border-gray-400 px-4 py-2">ผู้ที่ท่านแนะนำ(ย่อ)</th>
+              <th className="border border-gray-400 px-4 py-2">ผู้ที่ท่านแนะนำ(เต็ม)</th>
               <th className="border border-gray-400 px-4 py-2">ชื่อ</th>
               <th className="border border-gray-400 px-4 py-2">อีเมล</th>
               <th className="border border-gray-400 px-4 py-2">Token ID</th>
@@ -83,6 +84,7 @@ export default function RefereePage() {
             {matchingReferrerRecords.map((item: ReferrerData) => (
               <tr key={item.referrerId}>
                 <td className="border border-gray-400 px-4 py-2">{item.referrerId.slice(0, 6)}...{item.referrerId.slice(-4)}</td>
+                <td className="border border-gray-400 px-4 py-2">{item.referrerId}</td>
                 <td className="border border-gray-400 px-4 py-2">{item.name || "N/A"}</td>
                 <td className="border border-gray-400 px-4 py-2">{item.email || "N/A"}</td>
                 <td className="border border-gray-400 px-4 py-2">{item.tokenId || "N/A"}</td>
