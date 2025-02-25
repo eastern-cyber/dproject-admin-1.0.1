@@ -90,14 +90,6 @@ export default function CheckUser() {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="border border-gray-400 px-4 py-2">รหัสผู้แนะนำ</td>
-                                <td className="border border-gray-400 px-4 py-2">
-                                    <button className="text-blue-500 underline" onClick={() => handleUserClick(matchingUser.referrerId)}>
-                                        {matchingUser.referrerId}
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
                                 <td className="border border-gray-400 px-4 py-2">ชื่อ</td>
                                 <td className="border border-gray-400 px-4 py-2">{matchingUser.name || "N/A"}</td>
                             </tr>
@@ -108,6 +100,17 @@ export default function CheckUser() {
                             <tr>
                                 <td className="border border-gray-400 px-4 py-2">Token ID</td>
                                 <td className="border border-gray-400 px-4 py-2">{matchingUser.tokenId || "N/A"}</td>
+                            </tr>
+                        </tbody>
+                        <p><br /></p>
+                        <tbody>
+                            <tr>
+                                <td className="border border-gray-400 px-4 py-2">ผู้แนะนำ</td>
+                                <td className="border border-gray-400 px-4 py-2">
+                                    <button className="text-blue-500 underline" onClick={() => handleUserClick(matchingUser.referrerId)}>
+                                        {matchingUser.referrerId}
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
