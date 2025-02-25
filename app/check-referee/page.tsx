@@ -1,6 +1,5 @@
 "use client";
 
-import { useActiveAccount } from "thirdweb/react";import { inAppWallet } from "thirdweb/wallets";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
