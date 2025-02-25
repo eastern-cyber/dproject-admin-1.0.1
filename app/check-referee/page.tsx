@@ -39,18 +39,11 @@ export default function RefereePage() {
         return <div className="p-6 text-red-600">Failed to load data.</div>;
     }
 
-    // const matchingUsers = users.filter((user) => user.referrerId === referrerId);
     const matchingUsers = referrerId.trim()
-    ? users
-        .filter((user) => user.referrerId === referrerId && user.userId.trim() !== "")
-        .map((user, index) => ({ ...user, recordNumber: index + 1 }))
-    : [];
-
-    // const matchingUsers = referrerId.trim()
-    // ? users.filter((user) => user.referrerId === referrerId && user.userId.trim() !== "")
-    // : [];
-
-    // const matchingUsers = users.filter((user) => user.referrerId === referrerId && user.userId.trim() !== "");
+        ? users
+              .filter((user) => user.referrerId === referrerId && user.userId.trim() !== "")
+              .map((user, index) => ({ ...user, recordNumber: index + 1 }))
+        : [];
 
     return (
         <main className="p-4 pb-10 min-h-[100vh] flex flex-col items-center">
@@ -95,9 +88,29 @@ export default function RefereePage() {
                                     <tr key={user.userId}>
                                         <td className="border border-gray-400 px-4 py-2">{user.recordNumber}</td>
                                         <td className="border border-gray-400 px-4 py-2">
-                                            {user.userId.slice(0, 6)}...{user.userId.slice(-4)}
+                                            <a
+                                                href="#"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setReferrerId(user.userId);
+                                                }}
+                                                className="text-blue-500 underline hover:text-blue-700"
+                                            >
+                                                {user.userId.slice(0, 6)}...{user.userId.slice(-4)}
+                                            </a>
                                         </td>
-                                        <td className="border border-gray-400 px-4 py-2">{user.userId}</td>
+                                        <td className="border border-gray-400 px-4 py-2">
+                                            <a
+                                                href="#"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setReferrerId(user.userId);
+                                                }}
+                                                className="text-blue-500 underline hover:text-blue-700"
+                                            >
+                                                {user.userId}
+                                            </a>
+                                        </td>    
                                         <td className="border border-gray-400 px-4 py-2">{user.name || "N/A"}</td>
                                         <td className="border border-gray-400 px-4 py-2">{user.email || "N/A"}</td>
                                         <td className="border border-gray-400 px-4 py-2">{user.tokenId || "N/A"}</td>
@@ -105,9 +118,7 @@ export default function RefereePage() {
                                 ))}
                             </tbody>
                         </table>
-                        <p className="mt-4 text-lg font-semibold">
-                            รวม : {matchingUsers.length} ท่าน
-                        </p>
+                        <p className="mt-4 text-lg font-semibold">รวม : {matchingUsers.length} ท่าน</p>
                     </>
                 )}
                 <div className="flex flex-col mt-8 justify-center items-center w-full">
@@ -124,12 +135,7 @@ function Header() {
     return (
         <header className="flex flex-col items-center mb-12">
             <Link href="/" passHref>
-                {/* <Image
-                    src={dprojectIcon}
-                    alt=""
-                    className="mb-4 size-[100px]"
-                    style={{ filter: "drop-shadow(0px 0px 24px #a726a9a8" }}
-                /> */}
+                {/* Placeholder for image if needed */}
             </Link>
             <h1 className="text-1xl md:text-4xl font-semibold md:font-bold tracking-tighter">
                 Admin (Check Referee)
@@ -137,82 +143,3 @@ function Header() {
         </header>
     );
 }
-
-const WalletBalances: React.FC<{ walletAddress?: string }> = ({ walletAddress }) => {
-    return (
-        <div className="flex flex-col items-center p-6">
-            <p className="text-[19px]"><b>เลขที่กระเป๋าของท่าน</b></p>
-            <div className="border border-gray-400 bg-gray-800 p-2 mt-2 rounded">
-                <p className="text-[18px] break-all">{walletAddress || "ยังไม่ได้เชื่อมกระเป๋า !"}</p>
-            </div>
-        </div>
-    );
-};
-
-// "use client";
-
-
-// import { useParams } from "next/navigation";
-// import { useEffect, useState } from "react";
-
-// interface RefereeData {
-//   refereeId: string;
-//   referrerId: string;
-// }
-
-// export default function RefereeData() {
-//   const params = useParams(); // Get dynamic route params
-//   const refereeId = params.refereeId as string; // Ensure it's a string
-
-//   const [referrerIds, setReferrerIds] = useState<string[]>([]);
-//   const [loading, setLoading] = useState(true);
-  
-//   const jsonUrl = "https://raw.githubusercontent.com/eastern-cyber/dproject-11/main/public/dproject-users.json";
-
-//   useEffect(() => {
-//     fetch(jsonUrl)
-//       .then((res) => {
-//         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-//         return res.json();
-//       })
-//       .then((jsonData: RefereeData[]) => {
-//         setLoading(false);
-
-//         // Find all referrerIds corresponding to the given refereeId from the URL
-//         const matchedReferees = jsonData
-//           .filter(item => item.refereeId === refereeId)
-//           .map(item => item.referrerId)
-//           .sort(); // Sort alphabetically
-
-//         setReferrerIds(matchedReferees);
-//       })
-//       .catch((err) => {
-//         console.error("Error loading JSON:", err);
-//         setLoading(false);
-//       });
-//   }, [refereeId]);
-
-//   if (loading) return <div className="p-6">Loading...</div>;
-  
-//   return (
-//     <main className="p-4 pb-10 min-h-[100vh] flex flex-col items-center">
-//       <div className="flex flex-col items-center justify-center p-10 m-5 border border-gray-800 rounded-lg">
-//         <h1 className="p-4 text-2xl font-semibold tracking-tighter">รายละเอียดสมาชิก</h1>
-//         <p className="text-[20px] m-2 text-center font-bold">ข้อมูลสมาชิกเลขที่ {refereeId}</p>
-        
-//         {referrerIds.length > 0 ? (
-//           <div className="mt-4 text-center">
-//             <p className="text-lg text-gray-300"><b>Referrer IDs:</b></p>
-//             <ul className="text-gray-300 mt-2">
-//               {referrerIds.map((id, index) => (
-//                 <li key={index}>{id}</li>
-//               ))}
-//             </ul>
-//           </div>
-//         ) : (
-//           <p className="text-gray-400 text-sm mt-2">ไม่มีข้อมูลสำหรับ Referee ID: {refereeId}</p>
-//         )}
-//       </div>
-//     </main>
-//   );
-// }
