@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ConnectButton, useActiveAccount } from "thirdweb/react";
-import dprojectIcon from "@public/DFastLogo_650x600.svg";
+import dprojectIcon from "@public/DProjectLogo_650x600.svg";
 import { client } from "../client";
 import { chain } from "../chain";
 import { inAppWallet } from "thirdweb/wallets";
