@@ -12,10 +12,16 @@ interface UserData {
 }
 
 export default function CheckUser() {
+
     const [users, setUsers] = useState<UserData[] | null>(null);
     const [loading, setLoading] = useState(true);
-    const [inputUserId, setInputUserId] = useState("");
+    const [inputUserId, setInputUserId] = useState("0xe10E469d765F51e1a46488f08403dCB87f4292be");
     const [matchingUser, setMatchingUser] = useState<UserData | null>(null);
+
+    // const [users, setUsers] = useState<UserData[] | null>(null);
+    // const [loading, setLoading] = useState(true);
+    // const [inputUserId, setInputUserId] = useState("");
+    // const [matchingUser, setMatchingUser] = useState<UserData | null>(null);
 
     const usersUrl = "/dproject-users.json";
 
