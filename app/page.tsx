@@ -52,18 +52,33 @@ export default function Home() {
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://polygonscan.com/token/0x2a61627c3457ccea35482cadec698c7360ffb9f2/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Image
             aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/logo-polygon.png"
+            alt="Polygon Icon"
+            width={34}
+            height={30}
           />
-          Learn
+          3K NFT Explorer
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://opensea.io/assets/matic/0x2a61627c3457ccea35482cadec698c7360ffb9f2/0"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/logo-opensea.svg"
+            alt="Opensea Icon"
+            width={32}
+            height={32}
+          />
+          Opensea Assets
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
@@ -73,12 +88,12 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            src="/logo-vercel_500x120.png"
+            alt="Vercel Icon"
+            width={125}
+            height={30}
           />
-          Examples
+          Vercel Templates
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
@@ -88,12 +103,12 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+            src="/next.svg"
+            alt="Next Icon"
+            width={100}
+            height={25}
           />
-          Go to nextjs.org →
+          Nextjs.org →
         </a>
       </footer>
     </div>
