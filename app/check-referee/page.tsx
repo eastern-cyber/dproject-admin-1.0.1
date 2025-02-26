@@ -14,7 +14,7 @@ interface UserData {
 export default function RefereePage() {
     const [users, setUsers] = useState<UserData[] | null>(null);
     const [loading, setLoading] = useState(true);
-    const [referrerId, setReferrerId] = useState("");
+    const [referrerId, setReferrerId] = useState("0xe10E469d765F51e1a46488f08403dCB87f4292be");
 
     const usersUrl = "/dproject-users.json";
 
