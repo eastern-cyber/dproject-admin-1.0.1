@@ -88,28 +88,28 @@ export default function RefereePage() {
                                     <tr key={user.userId}>
                                         <td className="border border-gray-400 px-4 py-2">{user.recordNumber}</td>
                                         <td className="border border-gray-400 px-4 py-2">
-                                            <a
+                                            <Link
                                                 href="#"
                                                 onClick={(e) => {
                                                     e.preventDefault();
                                                     setReferrerId(user.userId);
                                                 }}
-                                                className="text-blue-500 underline hover:text-blue-700"
+                                                className="text-yellow-500 hover:text-red-500 active:text-blue-500"
                                             >
                                                 {user.userId.slice(0, 6)}...{user.userId.slice(-4)}
-                                            </a>
+                                            </Link>
                                         </td>
                                         <td className="border border-gray-400 px-4 py-2">
-                                            <a
+                                            <Link
                                                 href="#"
                                                 onClick={(e) => {
                                                     e.preventDefault();
                                                     setReferrerId(user.userId);
                                                 }}
-                                                className="text-blue-500 underline hover:text-blue-700"
+                                                className="text-yellow-500 hover:text-red-500 active:text-blue-500"
                                             >
                                                 {user.userId}
-                                            </a>
+                                            </Link>
                                         </td>    
                                         <td className="border border-gray-400 px-4 py-2">{user.name || "N/A"}</td>
                                         <td className="border border-gray-400 px-4 py-2">{user.email || "N/A"}</td>

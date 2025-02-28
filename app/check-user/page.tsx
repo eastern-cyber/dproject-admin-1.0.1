@@ -90,7 +90,9 @@ export default function CheckUser() {
                             <tr>
                                 <td className="border border-gray-400 px-4 py-2">เลขกระเป๋า</td>
                                 <td className="border border-gray-400 px-4 py-2">
-                                    <button className="text-blue-500 underline" onClick={() => handleUserClick(matchingUser.userId)}>
+                                    <button 
+                                        className="text-yellow-500 hover:text-red-500 active:text-blue-500"
+                                        onClick={() => handleUserClick(matchingUser.userId)}>
                                         {matchingUser.userId}
                                     </button>
                                 </td>
@@ -113,7 +115,9 @@ export default function CheckUser() {
                             <tr>
                                 <td className="border border-gray-400 px-4 py-2">ผู้แนะนำ</td>
                                 <td className="border border-gray-400 px-4 py-2">
-                                    <button className="text-blue-500 underline" onClick={() => handleUserClick(matchingUser.referrerId)}>
+                                    <button 
+                                        className="text-yellow-500 hover:text-red-500 active:text-blue-500" 
+                                        onClick={() => handleUserClick(matchingUser.referrerId)}>
                                         {matchingUser.referrerId}
                                     </button>
                                 </td>
