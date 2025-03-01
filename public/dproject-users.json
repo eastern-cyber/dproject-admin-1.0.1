@@ -1069,7 +1069,10 @@
         "referrerId": "0xe10E469d765F51e1a46488f08403dCB87f4292be",
         "email": "katawut@mail.com",
         "name": "Mac 0x12E4",
-        "tokenId": "7"
+        "tokenId": "7",
+        "userCreated": "Jan 12, 2025",
+        "aPlan": "Feb 8, 2025",
+        "bPlan": "Mar 10, 2025"
     },
     {
         "userId": "0x1feCc92383B1cEbcf1A3e9b2f90452ead0fc864a",
