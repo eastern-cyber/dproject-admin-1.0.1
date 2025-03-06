@@ -9,6 +9,8 @@ interface UserData {
     name?: string;
     email?: string;
     tokenId?: string;
+    userCreated?: string;
+    planA?: string;
 }
 
 export default function RefereePage() {
@@ -109,7 +111,11 @@ export default function RefereePage() {
                                             </Link><br />
                                             อีเมล: {user.email || "N/A"}<br />
                                             ชื่อ: {user.name || "N/A"}<br />
-                                            Token ID: {user.tokenId || "N/A"}
+                                            Token ID: {user.tokenId || "N/A"}<br />
+                                            วันลงทะเบียนผู้ใช้:&nbsp;
+                                                {user.userCreated? new Date(user.userCreated).toLocaleDateString("en-GB") // 'en-GB' is for dd/mm/yyyy format 
+                                                : "N/A"}<br />
+                                            วันเข้าร่วม Plan A: {user.planA || "N/A"}
                                         </td>
                                     </tr>
                                 ))}

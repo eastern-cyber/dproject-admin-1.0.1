@@ -136,7 +136,7 @@ export default function CheckUser() {
                 </td>
               </tr>
               <tr>
-                <td className="border border-gray-400 px-4 py-2">วันที่เข้าแผน A</td>
+                <td className="border border-gray-400 px-4 py-2">วันเข้าร่วม Plan A</td>
                 <td className="border border-gray-400 px-4 py-2">{matchingUser.planA || "N/A"}</td>
               </tr>
             </tbody>
