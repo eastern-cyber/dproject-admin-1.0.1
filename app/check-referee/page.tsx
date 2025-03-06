@@ -76,18 +76,14 @@ export default function RefereePage() {
                             <thead>
                                 <tr>
                                     <th className="border border-gray-400 px-4 py-2">#</th>
-                                    <th className="border border-gray-400 px-4 py-2">เลขกระเป๋า (ย่อ) </th>
-                                    <th className="border border-gray-400 px-4 py-2">เลขกระเป๋า (เต็ม)</th>
-                                    <th className="border border-gray-400 px-4 py-2">ชื่อ</th>
-                                    <th className="border border-gray-400 px-4 py-2">อีเมล</th>
-                                    <th className="border border-gray-400 px-4 py-2">Token ID</th>
+                                    <th className="border border-gray-400 px-4 py-2">รายละเอียดสมาชิก</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {matchingUsers.map((user) => (
                                     <tr key={user.userId}>
                                         <td className="border border-gray-400 px-4 py-2">{user.recordNumber}</td>
-                                        <td className="border border-gray-400 px-4 py-2">
+                                        {/* <td className="border border-gray-400 px-4 py-2">
                                             <Link
                                                 href="#"
                                                 onClick={(e) => {
@@ -98,8 +94,9 @@ export default function RefereePage() {
                                             >
                                                 {user.userId.slice(0, 6)}...{user.userId.slice(-4)}
                                             </Link>
-                                        </td>
+                                        </td> */}
                                         <td className="border border-gray-400 px-4 py-2">
+                                        เลขกระเป๋า:
                                             <Link
                                                 href="#"
                                                 onClick={(e) => {
@@ -109,11 +106,11 @@ export default function RefereePage() {
                                                 className="text-yellow-500 hover:text-red-500 active:text-blue-500"
                                             >
                                                 {user.userId}
-                                            </Link>
-                                        </td>    
-                                        <td className="border border-gray-400 px-4 py-2">{user.name || "N/A"}</td>
-                                        <td className="border border-gray-400 px-4 py-2">{user.email || "N/A"}</td>
-                                        <td className="border border-gray-400 px-4 py-2">{user.tokenId || "N/A"}</td>
+                                            </Link><br />
+                                            อีเมล: {user.email || "N/A"}<br />
+                                            ชื่อ: {user.name || "N/A"}<br />
+                                            Token ID: {user.tokenId || "N/A"}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
