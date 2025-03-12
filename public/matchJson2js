@@ -1,0 +1,55 @@
+const fs = require("fs");
+
+// Load JSON files
+const sourceData = JSON.parse(fs.readFileSync("source.json", "utf8"));
+const targetData = JSON.parse(fs.readFileSync("target.json", "utf8"));
+
+// Function to parse "dd/mm/yyyy, HH:MM:SS" correctly
+const parseDate = (timestamp) => {
+  if (!timestamp) return null; // Handle missing timestamps
+  const [date, time] = timestamp.split(", "); // Split into ["dd/mm/yyyy", "HH:MM:SS"]
+  const [day, month, year] = date.split("/"); // Extract day, month, year
+  return new Date(`${year}-${month}-${day}T${time}`); // Format to "yyyy-mm-ddTHH:MM:SS"
+};
+
+// Create a map of userId to the **oldest** block_timestamp
+const sourceMap = sourceData.reduce((acc, entry) => {
+  const { userId, block_timestamp } = entry;
+  if (!userId || !block_timestamp) {
+    console.warn(`Skipping entry with missing userId or block_timestamp:`, entry);
+    return acc;
+  }
+
+  const parsedTimestamp = parseDate(block_timestamp);
+  if (isNaN(parsedTimestamp)) {
+    console.error(`Invalid date format in source.json:`, block_timestamp);
+    return acc;
+  }
+
+  // Store the oldest timestamp for each userId
+  if (!acc[userId] || parsedTimestamp < acc[userId].parsedTimestamp) {
+    acc[userId] = { block_timestamp, parsedTimestamp };
+  }
+
+  return acc;
+}, {});
+
+// Debug: Log the sourceMap to verify data
+console.log("Mapped source data (userId -> oldest block_timestamp):", sourceMap);
+
+// Update target.json by adding "planA"
+const updatedTarget = targetData.map((entry) => {
+  const planAValue = sourceMap[entry.userId]?.block_timestamp || "";
+  if (!planAValue) {
+    console.warn(`No matching userId found in source.json for: ${entry.userId}`);
+  }
+  return {
+    ...entry,
+    planA: planAValue,
+  };
+});
+
+// Save output to a new JSON file
+fs.writeFileSync("output.json", JSON.stringify(updatedTarget, null, 2), "utf8");
+
+console.log("Updated JSON saved as output.json");
