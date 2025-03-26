@@ -13,7 +13,7 @@ import {
   } from "thirdweb/wallets";
 import WalletConnect from "@/components/WalletConnect";
 
-export default function ReferrerDetails({ params }: { params: { referrerId: string } }) {
+export default async function ReferrerDetails({ params }: { params: { referrerId: string } }) {
     const [referrerData, setReferrerData] = useState<{ email?: string; name?: string; tokenId?: string } | null>(null);
     const router = useRouter();
 
