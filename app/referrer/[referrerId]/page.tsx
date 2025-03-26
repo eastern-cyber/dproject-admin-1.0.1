@@ -12,8 +12,18 @@ import {
     createWallet,
   } from "thirdweb/wallets";
 import WalletConnect from "@/components/WalletConnect";
+// import { PageProps } from "next";
 
-export default async function ReferrerDetails({ params }: { params: { referrerId: string } }) {
+interface PageProps {
+    params: {
+      referrerId: string;
+    };
+  }
+
+  export default function ReferrerDetails({ params }: PageProps) {
+// export default function ReferrerDetails({ params }: PageProps<{ referrerId: string }>) {
+    // export default async function ReferrerDetails({ params }: { params: { referrerId: string } }) {
+// export default async function ReferrerDetails({ params }: { params: { referrerId: string } }) {
     const [referrerData, setReferrerData] = useState<{ email?: string; name?: string; tokenId?: string } | null>(null);
     const router = useRouter();
 
@@ -52,6 +62,7 @@ export default async function ReferrerDetails({ params }: { params: { referrerId
         router.push("/referrer/minting");
     };
 
+    // return <div>Referrer ID: {params.referrerId}</div>;
     return (
         <main className="p-4 pb-10 min-h-[100vh] flex flex-col items-center">
             <div className="flex flex-col items-center justify-center p-10 m-5 border border-gray-800 rounded-lg">
