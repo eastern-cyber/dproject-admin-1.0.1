@@ -22258,8 +22258,8 @@
     "planA": "02/06/2025,"
   },
   {
-    "userId": "0x037921E6EbbF5c423ABC039fb0C5FE519862eC33",
-    "referrerId": "0xE2e337f25914a825Dbd37001Ba9B08D15F73f9Db",
+    "userId": "0xE2e337f25914a825Dbd37001Ba9B08D15F73f9Db",
+    "referrerId": "",
     "email": "",
     "name": "",
     "tokenId": "2474",
