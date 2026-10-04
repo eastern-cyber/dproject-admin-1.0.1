@@ -140,9 +140,6 @@ export default function CheckUser() {
                 <td className="border border-gray-400 px-4 py-2">{matchingUser.planA || "N/A"}</td>
               </tr>
             </tbody>
-            <p>
-              <br />
-            </p>
             <tbody>
               <tr>
                 <td className="border border-gray-400 px-4 py-2">ผู้แนะนำ</td>
